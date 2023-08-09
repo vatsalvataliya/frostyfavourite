@@ -15,6 +15,10 @@ const {
   getdelete_cart,
 } = require("../controllers/TaskControllers");
 
+const {
+  sendCartData,
+} = require("../controllers/SendMailControllers");
+
 const router = Router();
 
 router.get("/get", getTasks);
@@ -32,6 +36,8 @@ router.post("/add_to_cart", addtocart);
 router.post("/getcartdata",getcartdata);
 router.post("/pay_letter",getpay_letter);
 router.post("/delete_cart",getdelete_cart);
+router.post("/sendCartDataMail",sendCartData);
+
 
 
 

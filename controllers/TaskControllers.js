@@ -7,7 +7,6 @@ const paycartdata = require("../models/PayCartModel");
 
 
 
-
 module.exports.getTasks = async (req, res) => {
   const tasks = await TaskModel.find();
   res.send(tasks);
@@ -53,6 +52,8 @@ module.exports.getcartdata = async (req, res) => {
   
 
   var cart_item = [];
+  let item_price = 0;
+  // var sum = 0;
   for (let i = 0; i < Usertasks.length; i++) {
     const Item_id = Usertasks[i].Item_Id;
     const UserId = Usertasks[i].User_Id;
@@ -70,6 +71,9 @@ module.exports.getcartdata = async (req, res) => {
         
         if(Item_id == item_id){
           cart_item.push(Itemtasks[j])
+          // let sum= item_price + Itemtasks[j].Price;
+          // item_price = sum;
+        // setItem_price(sum);
         }
       }
     }
