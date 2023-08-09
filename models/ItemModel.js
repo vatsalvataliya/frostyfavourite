@@ -9,6 +9,14 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  Price: {
+    type: String,
+    required: true,
+  },
+  Image: {
+    type: String,
+    required: true,
+  },
 
 });
 

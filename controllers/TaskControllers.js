@@ -21,6 +21,35 @@ module.exports.getCategoryTasks = async (req, res) => {
 
 };
 
+module.exports.addCategories = async (req,res) => {
+  const{Cate_name,Image} = req.body;
+
+  CategoryModel.create({Cate_name,Image})
+  .then((data) => {
+    console.log("Saved Successfully...");    
+    res.status(201).send(data);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.send({ error: err, msg: "Something went wrong!" });
+  });
+  
+};
+
+module.exports.addItems = async (req,res) => {
+  const{Cate_id,Item_name,Price,Image} = req.body
+
+  ItemModel.create({Cate_id,Item_name,Price,Image})
+  .then((data) => {
+    console.log("Saved Successfully...");    
+    res.status(201).send(data);
+  })
+  .catch((err) => {
+    console.log(err);
+    res.send({ error: err, msg: "Something went wrong!" });
+  });
+};
+
 module.exports.getItemTasks = async (req, res) => {
   const Itemtasks = await ItemModel.find();
   res.send(Itemtasks);
