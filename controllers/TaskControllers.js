@@ -86,6 +86,7 @@ module.exports.getcartdata = async (req, res) => {
   for (let i = 0; i < Usertasks.length; i++) {
     const Item_id = Usertasks[i].Item_Id;
     const UserId = Usertasks[i].User_Id;
+    const Qty = Usertasks[i].Qty;
 
     // const password = UserTask[i].Password;
 
@@ -99,7 +100,18 @@ module.exports.getcartdata = async (req, res) => {
         // const password = UserTask[i].Password;
         
         if(Item_id == item_id){
-          cart_item.push(Itemtasks[j])
+          // cart_item.push({Item:Itemtasks[j],qty:Qty})
+          cart_item.push(
+            {
+              _id:Itemtasks[j]._id,
+              Cate_id:Itemtasks[j].Cate_id,
+              Item_name:Itemtasks[j].Item_name,
+              Price:parseInt(Itemtasks[j].Price)*parseInt(Qty),
+              Image:Itemtasks[j].Image,
+              Item_qty:Qty
+            }
+            )
+
           // let sum= item_price + Itemtasks[j].Price;
           // item_price = sum;
         // setItem_price(sum);
@@ -141,7 +153,7 @@ paycartdata.create({ Cart })
 };
 
 module.exports.addtocart = async(req, res) => {
-  const { Item_Id,User_Id } = req.body;
+  const { Item_Id,User_Id,Qty } = req.body;
 
   const Itemtasks = await ItemModel.find();
   const Usertasks = await UserModel.find();
@@ -170,7 +182,7 @@ module.exports.addtocart = async(req, res) => {
   // }
   
 
-  Addtocart.create({ Item_Id,User_Id })
+  Addtocart.create({ Item_Id,User_Id,Qty })
     .then((data) => {
       console.log("Add Cart Data Successfully...");
       res.status(201).send(data);

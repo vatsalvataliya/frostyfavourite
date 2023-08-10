@@ -9,6 +9,10 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  Qty: {
+    type: String,
+    required: true,
+  },
 //   user_data: {
 //     type: Array,
 //     required: true,

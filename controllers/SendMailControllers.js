@@ -87,7 +87,7 @@ for (let index = 0; index < Cart_data.length; index++) {
     item_name.push(
             "<div style='padding: 0.1rem;'>"+
               "<h5 style='display:flex;justify-content:space-between;'>"+
-                "<div>"+Cart_data[index].Item_name+"</div>"+
+                "<div>"+Cart_data[index].Item_name+"("+Cart_data[index].Item_qty+")</div>"+
                 "<div></div>"+
                 "<div style='margin-left:81%;'>"+Cart_data[index].Price+"</div>"+     
               "</h5>"+
