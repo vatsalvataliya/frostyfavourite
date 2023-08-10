@@ -87,6 +87,7 @@ module.exports.getcartdata = async (req, res) => {
     const Item_id = Usertasks[i].Item_Id;
     const UserId = Usertasks[i].User_Id;
     const Qty = Usertasks[i].Qty;
+    const Cart_id = Usertasks[i]._id;
 
     // const password = UserTask[i].Password;
 
@@ -103,6 +104,7 @@ module.exports.getcartdata = async (req, res) => {
           // cart_item.push({Item:Itemtasks[j],qty:Qty})
           cart_item.push(
             {
+              Cart_Id:Cart_id,
               _id:Itemtasks[j]._id,
               Cate_id:Itemtasks[j].Cate_id,
               Item_name:Itemtasks[j].Item_name,
@@ -286,5 +288,36 @@ module.exports.getdelete_cart = async(req, res) => {
     }
 }
 res.send('Order Place And Delete Successfully...')
+
+};
+
+module.exports.getdelete_item = async(req, res) => {
+  const { Auth_id,Cart_Id } = req.body;
+
+  const cart = await Addtocart.find();
+  for (let i = 0; i < cart.length; i++) {
+    const CartId = cart[i]._id;
+    const UserId = cart[i].User_Id;
+
+
+if(CartId == Cart_Id && UserId == Auth_id){
+
+  Addtocart.findByIdAndDelete(Cart_Id)
+  .then((data) => {
+    console.log("Order Place And Delete Successfully...");
+    // res.status(201).send(data);
+    res.send('Item Delete Successfully ... ...')
+  })
+  .catch((err) => {
+    console.log(err);
+    // res.send({ error: err, msg: "Something went wrong!" });
+    res.send('Something went wrong! ... ...')
+
+  });
+}
+}
+
+ 
+// res.send('Order Place And Delete Successfully...')
 
 };
