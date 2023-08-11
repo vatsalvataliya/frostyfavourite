@@ -89,7 +89,7 @@ for (let index = 0; index < Cart_data.length; index++) {
               "<h5 style='display:flex;justify-content:space-between;'>"+
                 "<div>"+Cart_data[index].Item_name+"("+Cart_data[index].Item_qty+")</div>"+
                 "<div></div>"+
-                "<div style='margin-left:81%;'>"+Cart_data[index].Price+"</div>"+     
+                "<div style='margin-left:81%;'>Rs."+Cart_data[index].Price+"</div>"+     
               "</h5>"+
             "</div>"  
         );
@@ -195,7 +195,7 @@ const mailoptionsuser = {
                 "<h5 style='display: flex;justify-content: space-between;'>"+
                     "<div>Total Amount</div>"+
                     "<div></div>"+
-                    "<div style='margin-left:77%;'>"+total_price+"</div>"+     
+                    "<div style='margin-left:77%;'>Rs."+total_price+"</div>"+     
                 "</h5>"+
             "</div>"+ 
         "</div>"+
