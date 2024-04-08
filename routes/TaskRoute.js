@@ -1,5 +1,7 @@
 const { Router } = require("express");
 
+
+
 const {
   getTasks,
   saveTask,
@@ -16,12 +18,16 @@ const {
   addCategories,
   addItems,
   getdelete_item,
+   getAdminUsers,
 } = require("../controllers/TaskControllers");
 
 const {
   sendCartData,
   delete_order_detail,
   get_OrderDetail,
+  sendContact,
+  pay_now,
+
 
 } = require("../controllers/SendMailControllers");
 
@@ -36,6 +42,7 @@ router.post("/get_OrderDetail", get_OrderDetail);
 
 router.post("/add_category", addCategories);
 router.post("/add_item", addItems);
+router.get("/get_Admin_Users", getAdminUsers);
 // router.post("/save", saveTask);
 
 router.post("/category_id", getcate_item);
@@ -49,12 +56,14 @@ router.post("/delete_cart",getdelete_cart);
 router.post("/delete_item",getdelete_item);
 
 router.post("/sendCartDataMail",sendCartData);
+router.post("/sendContact",sendContact);
 router.post("/delete_order_detail",delete_order_detail);
 
 
 
 
 router.put("/update/:id", updateTask);
-router.delete("/delete/:id", deleteTask);
+router.post("/delete", deleteTask);
+router.post("/pay_now",pay_now)
 
 module.exports = router;
