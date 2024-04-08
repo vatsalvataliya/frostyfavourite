@@ -64,6 +64,6 @@ router.post("/delete_order_detail",delete_order_detail);
 
 router.put("/update/:id", updateTask);
 router.post("/delete", deleteTask);
-router.post("/pay_now",pay_now)
+router.post('/pay_now',pay_now)
 
 module.exports = router;
