@@ -26,9 +26,7 @@ const {
   delete_order_detail,
   get_OrderDetail,
   sendContact,
-  pay_now,
-
-
+  getpay_now,
 } = require("../controllers/SendMailControllers");
 
 const router = Router();
@@ -64,6 +62,6 @@ router.post("/delete_order_detail",delete_order_detail);
 
 router.put("/update/:id", updateTask);
 router.post("/delete", deleteTask);
-router.post('/pay_now',pay_now)
+router.post("/pay_now", getpay_now)
 
 module.exports = router;

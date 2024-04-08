@@ -311,7 +311,7 @@ res.send(data)
   
 //   const randomWholeNumber = getRandomWholeNumber(5, 15); // Generates random integer between 5 and 15
 //   console.log(randomWholeNumber);
-module.exports.pay_now = async(req, res) => {
+module.exports.getpay_now = async(req, res) => {
  const products = req.body;
  const total = req.body;
  const qty = req.body;
