@@ -10,7 +10,7 @@ const pay_now = async (req,res) => {
     const total = req.body;
     const qty = req.body;
    
-   
+   console.log(total);
    const data = products.body;
    
    const lineItems = data.map((product) => ({
@@ -18,12 +18,13 @@ const pay_now = async (req,res) => {
            currency:"inr",
            product_data:{
                name:product.Item_name,
+               images:[product.Image],
            },
            
-           unit_amount:20*100,
+           unit_amount:(product.Price)/product.Item_qty*100,
    
        },
-       quantity:2
+       quantity:product.Item_qty
    }));
    
    const session = await stripe.checkout.sessions.create({
@@ -48,6 +49,7 @@ const pay_now = async (req,res) => {
    //   });
    
      res.json({id:session.id})
+     
 }
 
 module.exports = {
