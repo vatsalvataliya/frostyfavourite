@@ -1,20 +1,20 @@
-import express, { json } from 'express';
-import { connect } from 'mongoose';
+const express = require('express');
+const mongoose = require('mongoose');
  
 require('dotenv').config();
 
-import routes from "./routes/TaskRoute";
+const routes = require("./routes/TaskRoute");
 
-import cors from 'cors';
+const cors = require('cors');
 
 const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-app.use(json());
+app.use(express.json());
 app.use(cors());
 
-connect(process.env.MONGO_URI).then(() => console.log('MongoDB Connected...')).catch((err) => console.log(err));
+mongoose.connect(process.env.MONGO_URI).then(() => console.log('MongoDB Connected...')).catch((err) => console.log(err));
 
 // app.get('/',(req,res) => {
 //     res.send('The Brave Coders');
