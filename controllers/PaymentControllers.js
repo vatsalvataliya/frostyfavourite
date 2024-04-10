@@ -5,7 +5,7 @@ const paycartdata = require("../models/PayCartModel");
 // const client = new MongoClient(process.env.MONGO_URI);
 const stripe = require("stripe")("sk_test_51P2zgcSIgQtCn65OYs8kE8JVEQ2Y8h3S4x3ArOeKq2Exyuq3xhqdK8fAKETDTwDZFgjARDQsBUbT1cLLNIeXKrCt00LsXmoBcC")
 
-module.exports.pay_now = async(req, res) => {
+const pay_now = async (req,res) => {
     const products = req.body;
     const total = req.body;
     const qty = req.body;
@@ -48,5 +48,8 @@ module.exports.pay_now = async(req, res) => {
    //   });
    
      res.json({id:session.id})
-     
+}
+
+module.exports = {
+ pay_now 
      };

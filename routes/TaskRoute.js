@@ -18,7 +18,7 @@ const {
   addCategories,
   addItems,
   getdelete_item,
-   getAdminUsers,
+  //  getAdminUsers,
 } = require("../controllers/TaskControllers");
 
 const {
@@ -44,7 +44,7 @@ router.post("/get_OrderDetail", get_OrderDetail);
 
 router.post("/add_category", addCategories);
 router.post("/add_item", addItems);
-router.get("/get_Admin_Users", getAdminUsers);
+// router.get("/get_Admin_Users", getAdminUsers);
 // router.post("/save", saveTask);
 
 router.post("/category_id", getcate_item);
@@ -67,5 +67,7 @@ router.post("/delete_order_detail",delete_order_detail);
 router.put("/update/:id", updateTask);
 router.post("/delete", deleteTask);
 router.post("/pay_now",pay_now)
+
+
 
 module.exports = router;
