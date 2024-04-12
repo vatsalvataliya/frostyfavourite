@@ -19,6 +19,8 @@ const {
   addItems,
   getdelete_item,
   //  getAdminUsers,
+  getRestaurant,
+  getTopRestro
 } = require("../controllers/TaskControllers");
 
 const {
@@ -39,6 +41,8 @@ router.get("/get", getTasks);
 
 router.get("/catedata_get", getCategoryTasks);
 router.get("/itemdata_get", getItemTasks);
+router.get("/restaurant", getRestaurant);
+router.get("/top_restro", getTopRestro);
 router.post("/get_OrderDetail", get_OrderDetail);
 
 

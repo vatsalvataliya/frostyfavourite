@@ -3,6 +3,10 @@ const CategoryModel = require("../models/CategoryModel");
 const ItemModel = require("../models/ItemModel");
 const Addtocart = require("../models/CartModel");
 const paycartdata = require("../models/PayCartModel");
+const Restaurantdata = require("../models/RestaurantModel");
+const TopRestrodata = require("../models/TopRestroModel");
+
+
 
 
 
@@ -58,11 +62,11 @@ module.exports.getItemTasks = async (req, res) => {
 };
 
 module.exports.saveTask = (req, res) => {
-  const { F_Name,L_Name,Number,Email,Password,ConfirmPassword } = req.body;
+  const { F_Name,Address,Number,Email,Password,ConfirmPassword } = req.body;
   // const { L_name } = req.body;
 
 
-  UserModel.create({ F_Name,L_Name,Number,Email,Password,ConfirmPassword })
+  UserModel.create({ F_Name,Number,Address,Email,Password,ConfirmPassword })
     .then((data) => {
       console.log("Saved Successfully...");
       res.status(201).send(data);
@@ -141,7 +145,7 @@ module.exports.getpay_letter = async (req, res) => {
     Cart.push(Usertasks[i])
     }
 }
-paycartdata.create({ Cart })
+paycartdata.create({ Cart,Auth_id })
 .then((data) => {
   console.log("Order Placed Successfully...");
   res.status(201).send(data);
@@ -250,15 +254,16 @@ module.exports.updateTask = (req, res) => {
     });
 };
 
-module.exports.deleteTask = (req, res) => {
+module.exports.deleteTask = async(req, res) => {
   const { id } = req.params;
+  const tasks = await paycartdata.find();
+  for (let i = 0; i < tasks.length; i++) {
 
-  TaskModel.findByIdAndDelete(id)
-    .then(() => res.send("Deleted successfully"))
-    .catch((err) => {
-      console.log(err);
-      res.send({ error: err, msg: "Something went wrong!" });
-    });
+    paycartdata.findByIdAndDelete(tasks._id)
+
+
+  }
+  res.send('delete')
 };
 
 module.exports.getdelete_cart = async(req, res) => {
@@ -321,3 +326,17 @@ if(CartId == Cart_Id && UserId == Auth_id){
 // res.send('Order Place And Delete Successfully...')
 
 };
+module.exports.getAdminUsers = async (req,res) => {
+  const get_Admin_Users = await AdminUserModel.find();
+  res.send(get_Admin_Users);
+}
+
+module.exports.getRestaurant = async (req,res) => {
+  const Restro = await Restaurantdata.find();
+  res.send(Restro);
+}
+
+module.exports.getTopRestro = async (req,res) => {
+  const Restro = await TopRestrodata.find();
+  res.send(Restro);
+}
