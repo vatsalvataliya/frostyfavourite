@@ -5,12 +5,12 @@ const paycartdata = require("../models/PayCartModel");
 // const client = new MongoClient(process.env.MONGO_URI);
 const stripe = require("stripe")("sk_test_51P2zgcSIgQtCn65OYs8kE8JVEQ2Y8h3S4x3ArOeKq2Exyuq3xhqdK8fAKETDTwDZFgjARDQsBUbT1cLLNIeXKrCt00LsXmoBcC")
 
-const pay_now = async (req,res) => {
+module.exports.pay_now = async(req, res) => {
     const products = req.body;
     const total = req.body;
     const qty = req.body;
    
-   console.log(total);
+//    console.log(total);
    const data = products.body;
    
    const lineItems = data.map((product) => ({
@@ -27,6 +27,7 @@ const pay_now = async (req,res) => {
        quantity:product.Item_qty
    }));
    
+   
    const session = await stripe.checkout.sessions.create({
        payment_method_types:["card"],
        line_items: lineItems,
@@ -36,7 +37,11 @@ const pay_now = async (req,res) => {
    
      });
    
-     
+    // console.log(stripe.checkout.sessions.completed); 
+    // console.log(session);
+    // if (session.success_url) {
+    //     console.log('true');
+    // }
    // const customer = await stripe.customers.create({
    //     name: 'Jenny Rosen',
    //     address: {
@@ -50,8 +55,4 @@ const pay_now = async (req,res) => {
    
      res.json({id:session.id})
      
-}
-
-module.exports = {
- pay_now 
      };

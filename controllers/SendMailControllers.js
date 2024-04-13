@@ -2,6 +2,9 @@ const nodemailer = require("nodemailer");
 const order_receipt = require("../models/OrderDetail");
 const Addtocart = require("../models/CartModel");
 const paycartdata = require("../models/PayCartModel");
+const RestaurantModel =  require("../models/RestaurantModel");
+const CategoryModel = require("../models/CategoryModel");
+const ItemModel = require("../models/ItemModel");
 // const client = new MongoClient(process.env.MONGO_URI);
 module.exports.sendCartData = async(req, res) => {
   const { Auth_id,Name,Email,Number,Address,Cart_data,Total } = req.body;
@@ -310,3 +313,48 @@ res.send(data)
   
 //   const randomWholeNumber = getRandomWholeNumber(5, 15); // Generates random integer between 5 and 15
 //   console.log(randomWholeNumber);
+
+module.exports.getRestroItem = async (req, res) => {
+    
+  const{Restro_id} = req.body;
+
+        const Restaurant = await RestaurantModel.find();
+        const Category = await CategoryModel.find();
+        const Item = await ItemModel.find();
+
+        // res.send(Restro_id);
+        // res.send('hiii');
+      
+  
+let array = [];
+//   console.log(Restaurant);
+for (let index = 0; index < Restaurant.length; index++) {
+    const restoid = Restaurant[index]._id;
+    if (restoid == Restro_id) {
+        array.push(Restaurant[index])
+    }
+    
+}
+// console.log(Restro_id);
+// console.log(array);
+let item_array = [];
+  for (let index = 0; index < array.length; index++) {
+    const element = array[index].Cate_id;
+    for (let b = 0; b < element.length; b++) {
+        const cateid = element[b];
+    // console.log(cateid);
+         for (let c = 0; c < Item.length; c++) {
+            const id = Item[c].Cate_id;
+            // console.log(id);
+            if (id == cateid) {
+                item_array.push(Item[c])
+            }
+            
+         }
+        
+    }
+  }
+// console.log(item_array);
+        res.send(item_array);
+
+  };

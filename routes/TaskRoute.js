@@ -28,7 +28,7 @@ const {
   delete_order_detail,
   get_OrderDetail,
   sendContact,
-
+  getRestroItem
 
 
 } = require("../controllers/SendMailControllers");
@@ -72,6 +72,7 @@ router.put("/update/:id", updateTask);
 router.post("/delete", deleteTask);
 router.post("/pay_now",pay_now)
 
+router.post("/get_restro_item", getRestroItem);
 
 
 module.exports = router;
